@@ -1,5 +1,6 @@
 package api;
 
+
 public class Network {
 
 	// input to layers weight;
@@ -211,6 +212,21 @@ public class Network {
 		}
 		System.out.println();
 	}
+	
+	public static double[] calculateError(double[] input, double[] desired) {
+		double[] cost = new double[input.length];
+		if(input.length!=desired.length) {
+			System.out.println("Error, array lengths not valid");
+			System.out.println("input is: " + input.length);
+			System.out.println("desired is: " + desired.length);
+			return null;
+		}
+		
+		for(int i = 0; i<input.length; i++) {
+			cost[i] = (input[i]-desired[i])*(input[i]-desired[i]);
+		}
+		return cost;
+	}
 
 	public double[][] getBias() {
 		return bias;
@@ -266,8 +282,16 @@ public class Network {
 		}
 		
 		Network.printArray(zf, "Final values passing through output");
+		double[] desiredout =  {0, 1, 1, 0};
+		double[] zf1 = new double[zf.length];
+		for(int i = 0; i<zf1.length; i++) {
+			zf1[i] = zf[i][0];
+		}
+		double[] c = Network.calculateError(zf1, desiredout);
 		
-		
+		for(int i = 0; i<c.length; i++) {
+			System.out.println(c[i]);
+		}
 		
 //		double[][] b = {{1},
 //						{1},
