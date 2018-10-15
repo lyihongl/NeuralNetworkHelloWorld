@@ -11,10 +11,6 @@ public class Node {
 		bias = Math.random();
 	}
 	
-	public double activationFunction(double input) {
-		return 1/(1+Math.pow(Math.E, -input));
-	}
-	
 	public void adjustBias(double x) {
 		bias+=x;
 	}
